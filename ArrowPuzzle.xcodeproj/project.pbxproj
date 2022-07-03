@@ -13,6 +13,8 @@
 		86155D7628713BC600968698 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86155D6428713BBD00968698 /* ContentView.swift */; };
 		86155D7728713BC600968698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86155D6528713BC600968698 /* Assets.xcassets */; };
 		86155D7828713BC600968698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86155D6528713BC600968698 /* Assets.xcassets */; };
+		86155D8228713C1200968698 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86155D8128713C1200968698 /* HexGrid.swift */; };
+		86155D8328713C1200968698 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86155D8128713C1200968698 /* HexGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		86155D6A28713BC600968698 /* ArrowPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArrowPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86155D7028713BC600968698 /* ArrowPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArrowPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86155D7228713BC600968698 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		86155D8128713C1200968698 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 			children = (
 				86155D6328713BBD00968698 /* ArrowPuzzleApp.swift */,
 				86155D6428713BBD00968698 /* ContentView.swift */,
+				86155D8128713C1200968698 /* HexGrid.swift */,
 				86155D6528713BC600968698 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -178,6 +182,7 @@
 			files = (
 				86155D7528713BC600968698 /* ContentView.swift in Sources */,
 				86155D7328713BC600968698 /* ArrowPuzzleApp.swift in Sources */,
+				86155D8228713C1200968698 /* HexGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +192,7 @@
 			files = (
 				86155D7628713BC600968698 /* ContentView.swift in Sources */,
 				86155D7428713BC600968698 /* ArrowPuzzleApp.swift in Sources */,
+				86155D8328713C1200968698 /* HexGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

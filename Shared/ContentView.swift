@@ -98,6 +98,7 @@ struct ContentView: View {
     
     @EnvironmentObject var hexGrid: HexGrid
     @State var mode: Mode = .logical
+    @State var amount: Int = 1
     
     var modeTitle: String {
         switch mode {
@@ -114,9 +115,9 @@ struct ContentView: View {
                 .onReceive(publisher) { output in
                     switch mode {
                     case .logical:
-                        hexGrid.updateLogical(output.column, output.row)
+                        hexGrid.updateLogical(output.column, output.row, by: amount)
                     case .free:
-                        hexGrid[output.column, output.row] += 1
+                        hexGrid[output.column, output.row] += amount
                     }
                 }
             HStack {
@@ -127,6 +128,16 @@ struct ContentView: View {
                 Picker(selection: $mode, label: Text("Mode:")) {
                     Text("Logical").tag(Mode.logical)
                     Text("Free").tag(Mode.free)
+                }
+                .pickerStyle(.segmented)
+            }
+            HStack {
+                Picker(selection: $amount, label: Text("Increment: ")) {
+                    Text("1").tag(1)
+                    Text("2").tag(2)
+                    Text("3").tag(3)
+                    Text("4").tag(4)
+                    Text("5").tag(5)
                 }
                 .pickerStyle(.segmented)
             }

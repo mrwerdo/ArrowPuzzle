@@ -90,10 +90,10 @@ class HexGrid : ObservableObject {
         ]
     }
     
-    func updateLogical(_ column: Int, _ row: Int) {
+    func updateLogical(_ column: Int, _ row: Int, by amount: Int = 1) {
         objectWillChange.send()
         for (y, x) in neighbours(at: column, row) where isValidNeighbour(y, x) {
-            self[y, x] += 1
+            self[y, x] += amount
         }
     }
     

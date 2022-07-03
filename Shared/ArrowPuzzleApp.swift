@@ -9,13 +9,19 @@ import SwiftUI
 
 @main
 struct ArrowPuzzleApp: App {
+    
+    @StateObject var hexGrid = HexGrid()
+    
     var body: some Scene {
         WindowGroup("Arrow Puzzle") {
             let properties = CellProperties(font: .largeTitle,
                                                    accentColor: Color.teal,
                                                    borderWidth: 2.0,
                                                    backgroundColor: .white)
-            ContentView().environment(\.cellProperties, properties)
+            ContentView()
+                .environmentObject(hexGrid)
+                .environment(\.cellProperties, properties)
+                .fixedSize()
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

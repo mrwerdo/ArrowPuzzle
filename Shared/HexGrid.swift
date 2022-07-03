@@ -6,44 +6,99 @@
 //
 
 import Foundation
-import SwiftUI
 import Combine
 
-struct HexGrid {
+class HexGrid : ObservableObject {
+    private struct Dimensions {
+        var numberOfColumns: Int
+        var numberOfCells: Int {
+            return numberOfCellsBefore(column: numberOfColumns)
+        }
+        
+        func lengthOfColumn(_ c: Int) -> Int {
+            // fixme: hard coded constant
+            return numberOfColumns - abs(3 - c)
+        }
+        
+        func index(column: Int, row: Int) -> Int {
+            return numberOfCellsBefore(column: column) + row
+        }
+        
+        func numberOfCellsBefore(column y: Int) -> Int {
+            if y == 0 {
+                return 0
+            } else {
+                return lengthOfColumn(y - 1) + numberOfCellsBefore(column: y - 1)
+            }
+        }
+    }
+    
+    let objectWillChange = ObservableObjectPublisher()
+    
     private var cells: [Int]
+    private let dimensions: Dimensions
     
     init() {
-        let numberOfCells = 2 * (4 + 5 + 6) + 7
-        cells = [Int](repeating: 0, count: numberOfCells)
+        dimensions = Dimensions(numberOfColumns: 7)
+        cells = [Int](repeating: 0, count: dimensions.numberOfCells)
     }
     
-    private func index(column: Int, row: Int) -> Int {
-        return numberOfCellsBefore(column: column) + row
-    }
-    
-    private func numberOfCellsBefore(column y: Int) -> Int {
-        // 7 - abs(3 - y) gives:
-        // 6 - y = 4
-        // 5 - y = 5
-        // 4 - y = 6
-        // 3 - y = 7
-        // 2 - y = 6
-        // 1 - y = 5
-        // 0 - y = 4
-        // But we want the cumulative sum of the number of cells.
-        if y == 0 {
-            return 0
-        } else {
-            return 7 - abs(3 - y) + numberOfCellsBefore(column: y - 1)
-        }
+    func lengthOfColumn(_ c: Int) -> Int {
+        return dimensions.lengthOfColumn(c)
     }
     
     subscript(col: Int, row: Int) -> Int {
         get {
-            return cells[index(column: col, row: row)]
+            return cells[dimensions.index(column: col, row: row)]
         }
         set {
-            cells[index(column: col, row: row)] = min(0, max(6, newValue))
+            let clampedNewValue = newValue % 6
+            let index = dimensions.index(column: col, row: row)
+            let oldValue = cells[index]
+            if clampedNewValue != oldValue {
+                objectWillChange.send()
+            }
+            cells[index] = clampedNewValue
         }
+    }
+    
+    private func isValidNeighbour(_ column: Int, _ row: Int) -> Bool {
+        if !(0..<dimensions.numberOfColumns).contains(column) {
+            return false
+        }
+        let length = lengthOfColumn(column)
+        if !(0..<length).contains(row) {
+            return false
+        }
+        return true
+    }
+    
+    private func neighbours(at column: Int, _ row: Int) -> [(Int, Int)] {
+        // Row values need one subtracted depending on whether the cell is located to the left or
+        // right of the center.
+        // fixme: this logic is incorrect for an even number of columns
+        let l_adj = column - 1 < dimensions.numberOfColumns/2 ? -1 : 0
+        let r_adj = column + 1 > dimensions.numberOfColumns/2 ? -1 : 0
+        return [
+            (column, row - 1),              // top
+            (column, row),                  // center
+            (column, row + 1),              // bottom
+            (column + 1, row + r_adj),      // right top
+            (column + 1, row + r_adj + 1),  // right bottom
+            (column - 1, row + l_adj),      // left bottom
+            (column - 1, row + l_adj + 1),  // left top
+        ]
+    }
+    
+    func updateLogical(_ column: Int, _ row: Int) {
+        objectWillChange.send()
+        for (y, x) in neighbours(at: column, row) where isValidNeighbour(y, x) {
+            self[y, x] += 1
+        }
+    }
+    
+    func reset() {
+        objectWillChange.send()
+        cells = [Int](repeating: 0, count: dimensions.numberOfCells)
     }
 }

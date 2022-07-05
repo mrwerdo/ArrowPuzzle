@@ -14,11 +14,8 @@ struct ArrowPuzzleApp: App {
     
     var body: some Scene {
         WindowGroup("Arrow Puzzle") {
-            let properties = CellProperties(font: .largeTitle,
-                                            borderWidth: 2.0)
             ContentView()
                 .environmentObject(hexGrid)
-                .environment(\.cellProperties, properties)
                 .fixedSize()
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

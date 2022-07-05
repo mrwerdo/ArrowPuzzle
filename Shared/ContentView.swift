@@ -13,7 +13,7 @@ struct CellProperties : EnvironmentKey {
     
     var size: CGSize = CGSize(width: 50, height: 50)
     var font: Font = Font.system(.largeTitle)
-    var borderWidth: Double = 4.0
+    var borderWidth: Double = 0.0
 }
 
 extension EnvironmentValues {
@@ -149,7 +149,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let properties = CellProperties(font: .largeTitle, borderWidth: 2.0)
+        let properties = CellProperties(borderWidth: 4.0)
         let hexGrid = HexGrid()
         
         ForEach(ColorScheme.allCases, id: \.self) {

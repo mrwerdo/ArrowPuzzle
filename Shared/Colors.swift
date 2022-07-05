@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct Colors : EnvironmentKey {
-    static var defaultValue: Colors = Colors.Themes.something2
+    static var defaultValue: Colors = Colors.Themes.blue
     
     var text: Color
     var stroke: Color
@@ -35,28 +35,21 @@ struct Colors : EnvironmentKey {
     
     struct Themes {
         static let red = Colors(
-            text: "D83150",
+            text: "d83150",
             stroke: "6d1425",
-            background: [
-                "3b0610",
-                "430813",
-                "4c0b17",
-                "540d1a",
-                "5c0f1e",
-                "641121"
-            ].reversed()
+            background: ["641121", "5c0f1e", "540d1a", "4c0b17", "430813", "3b0610"]
         )
         
-        static let red2 = Colors(
-            text: "3e3b92",
+        static let redBlue = Colors(
+            text: "ffffff",
             stroke: "ffffff",
             background: ["f44369", "d64270","b74077","993f7e","7b3e84","5c3c8b"]
         )
         
-        static let red3 = Colors(
+        static let bluePink = Colors(
             text: "ffb600",
             stroke: "ffffff",
-            background: ["6a00f4","8900f2","bc00dd","e500a4","f20089","2d00f7"]//.reversed()
+            background: ["4d00f7", "6a00f4","8900f2","bc00dd","e500a4","f20089"]
         )
         
         static let colorful = Colors(
@@ -71,19 +64,22 @@ struct Colors : EnvironmentKey {
             background: ["2F2F2F","343434","464646","575757","696969","9a9a9a"]
         )
         
-        static let blue = Colors(text: "bbbbbb"/*"052b56"*/,
-                          stroke: "052b56", /*"052f5f"*/
-                          background: ["03416b","005377","026879","036e7a","03737a","037d7a"]
+        static let teal = Colors(
+            text: "bbbbbb",
+            stroke: "052b56",
+            background: ["03416b","005377","026879","036e7a","03737a","037d7a"]
         )
         
-        static let something = Colors(text: "ffffff",
-                               stroke: "1c2541",
-                               background: ["2b3b56","3a506b","4b8895","53a4aa","57b2b4","5bc0be"]
+        static let blue = Colors(
+            text: "ffffff",
+            stroke: "1c2541",
+            background: ["2b3b56","3a506b","4b8895","53a4aa","57b2b4","5bc0be"]
         )
         
-        static let something2 = Colors(text: "244060",
-                                stroke: "515575",
-                                background: ["6d597a","915f78","b56576","e56b6f","e88c7d","eaac8b"].reversed()
+        static let orange = Colors(
+            text: "244060",
+            stroke: "515575",
+            background: ["eaac8b", "e88c7d", "e56b6f", "b56576", "915f78", "6d597a"]
         )
     }
 }
@@ -130,13 +126,13 @@ struct Color_Previews: PreviewProvider {
     static var previews: some View {
         let colors: [Colors] = [
             Colors.Themes.red,
-            Colors.Themes.red2,
-            Colors.Themes.red3,
+            Colors.Themes.redBlue,
+            Colors.Themes.bluePink,
             Colors.Themes.colorful,
             Colors.Themes.gray,
+            Colors.Themes.teal,
             Colors.Themes.blue,
-            Colors.Themes.something,
-            Colors.Themes.something2
+            Colors.Themes.orange
         ]
         
         let properties = CellProperties(font: .largeTitle, borderWidth: 0.0)

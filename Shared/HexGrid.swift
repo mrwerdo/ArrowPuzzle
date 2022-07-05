@@ -101,4 +101,18 @@ class HexGrid : ObservableObject {
         objectWillChange.send()
         cells = [Int](repeating: 0, count: dimensions.numberOfCells)
     }
+    
+    func randomize<T: RandomNumberGenerator>(using generator: inout T) {
+        objectWillChange.send()
+        for index in 0..<cells.count {
+            cells[index] = (0..<6).randomElement(using: &generator) ?? 0
+        }
+    }
+    
+    func randomize() {
+        objectWillChange.send()
+        for index in 0..<cells.count {
+            cells[index] = (0..<6).randomElement() ?? 0
+        }
+    }
 }

@@ -15,6 +15,10 @@
 		86155D7828713BC600968698 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86155D6528713BC600968698 /* Assets.xcassets */; };
 		86155D8228713C1200968698 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86155D8128713C1200968698 /* HexGrid.swift */; };
 		86155D8328713C1200968698 /* HexGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86155D8128713C1200968698 /* HexGrid.swift */; };
+		862A0EC52873B44C00C22038 /* Xorshift128Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862A0EC42873B44C00C22038 /* Xorshift128Plus.swift */; };
+		862A0EC62873B44D00C22038 /* Xorshift128Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862A0EC42873B44C00C22038 /* Xorshift128Plus.swift */; };
+		86789AEC28717EDC00B3993F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86789AEB28717EDC00B3993F /* Colors.swift */; };
+		86789AED28717EDC00B3993F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86789AEB28717EDC00B3993F /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +29,8 @@
 		86155D7028713BC600968698 /* ArrowPuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArrowPuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86155D7228713BC600968698 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		86155D8128713C1200968698 /* HexGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexGrid.swift; sourceTree = "<group>"; };
+		862A0EC42873B44C00C22038 /* Xorshift128Plus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xorshift128Plus.swift; sourceTree = "<group>"; };
+		86789AEB28717EDC00B3993F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,8 @@
 				86155D6428713BBD00968698 /* ContentView.swift */,
 				86155D8128713C1200968698 /* HexGrid.swift */,
 				86155D6528713BC600968698 /* Assets.xcassets */,
+				86789AEB28717EDC00B3993F /* Colors.swift */,
+				862A0EC42873B44C00C22038 /* Xorshift128Plus.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -181,6 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86155D7528713BC600968698 /* ContentView.swift in Sources */,
+				862A0EC52873B44C00C22038 /* Xorshift128Plus.swift in Sources */,
+				86789AEC28717EDC00B3993F /* Colors.swift in Sources */,
 				86155D7328713BC600968698 /* ArrowPuzzleApp.swift in Sources */,
 				86155D8228713C1200968698 /* HexGrid.swift in Sources */,
 			);
@@ -191,6 +201,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				86155D7628713BC600968698 /* ContentView.swift in Sources */,
+				862A0EC62873B44D00C22038 /* Xorshift128Plus.swift in Sources */,
+				86789AED28717EDC00B3993F /* Colors.swift in Sources */,
 				86155D7428713BC600968698 /* ArrowPuzzleApp.swift in Sources */,
 				86155D8328713C1200968698 /* HexGrid.swift in Sources */,
 			);
@@ -312,7 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Colors/AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 63J747E7ZH;
@@ -342,7 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Colors/AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 63J747E7ZH;
@@ -373,7 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Colors/AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -401,7 +413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = Colors/AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;

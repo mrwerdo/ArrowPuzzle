@@ -15,9 +15,7 @@ struct ArrowPuzzleApp: App {
     var body: some Scene {
         WindowGroup("Arrow Puzzle") {
             let properties = CellProperties(font: .largeTitle,
-                                                   accentColor: Color.teal,
-                                                   borderWidth: 2.0,
-                                                   backgroundColor: .white)
+                                            borderWidth: 2.0)
             ContentView()
                 .environmentObject(hexGrid)
                 .environment(\.cellProperties, properties)

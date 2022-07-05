@@ -13,9 +13,7 @@ struct CellProperties : EnvironmentKey {
     
     var size: CGSize = CGSize(width: 50, height: 50)
     var font: Font = Font.system(.largeTitle)
-    var accentColor: Color = Color.accentColor
     var borderWidth: Double = 4.0
-    var backgroundColor: Color = .white
 }
 
 extension EnvironmentValues {
@@ -40,18 +38,19 @@ struct CellView: View {
     var row: Int
     @EnvironmentObject var hexGrid: HexGrid
     @Environment(\.cellProperties) var properties: CellProperties
+    @Environment(\.cellColors) var colors: Colors
 
     var body: some View {
         Text("\(hexGrid[column, row] + 1)")
             .font(properties.font)
             .frame(width: properties.size.width, height: properties.size.height)
-            .foregroundColor(properties.accentColor)
+            .foregroundColor(colors.text)
             .background(
                 Circle()
                     .inset(by: properties.borderWidth / 2)
                     .stroke(lineWidth: properties.borderWidth)
-                    .foregroundColor(properties.accentColor)
-                    .background(Circle().fill(properties.backgroundColor))
+                    .foregroundColor(colors.stroke)
+                    .background(Circle().fill(colors.background[hexGrid[column, row]]))
             )
             .onTapGesture {
                 publisher.send(CellTapEvent(column: column, row: row))
@@ -124,6 +123,9 @@ struct ContentView: View {
                 Button("Reset") {
                     hexGrid.reset()
                 }
+                Button("Randomize") {
+                    hexGrid.randomize()
+                }
                 Spacer(minLength: 50)
                 Picker(selection: $mode, label: Text("Mode:")) {
                     Text("Logical").tag(Mode.logical)
@@ -146,19 +148,17 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let properties = CellProperties(font: .largeTitle,
-                                           accentColor: Color.teal,
-                                           borderWidth: 2.0,
-                                           backgroundColor: .white)
-    
-    static var hexGrid = HexGrid()
-    
     static var previews: some View {
-        let publisher = PassthroughSubject<CellTapEvent, Never>()
-        HexGridView(publisher: publisher)
-            .environmentObject(hexGrid)
-            .environment(\.cellProperties, properties)
-            .frame(width: 500, height: 500)
-            .previewLayout(.sizeThatFits)
+        let properties = CellProperties(font: .largeTitle, borderWidth: 2.0)
+        let hexGrid = HexGrid()
+        
+        ForEach(ColorScheme.allCases, id: \.self) {
+            let publisher = PassthroughSubject<CellTapEvent, Never>()
+            HexGridView(publisher: publisher)
+                .environmentObject(hexGrid)
+                .environment(\.cellProperties, properties)
+                .previewLayout(.sizeThatFits)
+                .preferredColorScheme($0)
+        }
     }
 }

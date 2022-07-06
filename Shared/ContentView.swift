@@ -98,6 +98,7 @@ struct ContentView: View {
     @EnvironmentObject var hexGrid: HexGrid
     @State var mode: Mode = .logical
     @State var amount: Int = 1
+    @State var colors: Colors = Colors.defaultValue
     
     var modeTitle: String {
         switch mode {
@@ -110,6 +111,12 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            Picker(selection: $colors, label: Text("Theme:")) {
+                ForEach(0..<Colors.Themes.all.count, id: \.self) {
+                    Text("Theme \($0)").tag(Colors.Themes.all[$0])
+                }
+            }
+            .pickerStyle(.wheel)
             HexGridView(publisher: publisher)
                 .onReceive(publisher) { output in
                     switch mode {
@@ -119,6 +126,7 @@ struct ContentView: View {
                         hexGrid[output.column, output.row] += amount
                     }
                 }
+                .environment(\.cellColors, colors)
             HStack {
                 Button("Reset") {
                     hexGrid.reset()
@@ -134,7 +142,7 @@ struct ContentView: View {
                 .pickerStyle(.segmented)
             }
             HStack {
-                Picker(selection: $amount, label: Text("Increment: ")) {
+                Picker(selection: $amount, label: Text("Increment:")) {
                     Text("1").tag(1)
                     Text("2").tag(2)
                     Text("3").tag(3)

@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct Colors : EnvironmentKey {
+struct Colors : EnvironmentKey, Hashable {
     static var defaultValue: Colors = Colors.Themes.blue
     
     var text: Color
@@ -81,6 +81,17 @@ struct Colors : EnvironmentKey {
             stroke: "515575",
             background: ["eaac8b", "e88c7d", "e56b6f", "b56576", "915f78", "6d597a"]
         )
+        
+        static let all: [Colors] = [
+            .Themes.red,
+            .Themes.redBlue,
+            .Themes.bluePink,
+            .Themes.colorful,
+            .Themes.gray,
+            .Themes.teal,
+            .Themes.blue,
+            .Themes.orange
+        ]
     }
 }
 
@@ -124,16 +135,7 @@ extension Color {
 
 struct Color_Previews: PreviewProvider {
     static var previews: some View {
-        let colors: [Colors] = [
-            Colors.Themes.red,
-            Colors.Themes.redBlue,
-            Colors.Themes.bluePink,
-            Colors.Themes.colorful,
-            Colors.Themes.gray,
-            Colors.Themes.teal,
-            Colors.Themes.blue,
-            Colors.Themes.orange
-        ]
+
         
         let properties = CellProperties(font: .largeTitle, borderWidth: 0.0)
         let hexGrid = HexGrid()
@@ -141,17 +143,17 @@ struct Color_Previews: PreviewProvider {
         hexGrid.randomize(using: &generator)
         let publisher = PassthroughSubject<CellTapEvent, Never>()
         
-        return ForEach(0..<colors.count, id: \.self) { index in
+        return ForEach(0..<Colors.Themes.all.count, id: \.self) { index in
             Group {
                 HexGridView(publisher: publisher)
                     .environmentObject(hexGrid)
-                    .environment(\.cellColors, colors[index])
+                    .environment(\.cellColors, Colors.Themes.all[index])
                     .environment(\.cellProperties, properties)
                     .previewLayout(.sizeThatFits)
                     .preferredColorScheme(.light)
                 HexGridView(publisher: publisher)
                     .environmentObject(hexGrid)
-                    .environment(\.cellColors, colors[index])
+                    .environment(\.cellColors, Colors.Themes.all[index])
                     .environment(\.cellProperties, properties)
                     .previewLayout(.sizeThatFits)
                     .preferredColorScheme(.dark)

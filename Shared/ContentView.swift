@@ -109,14 +109,22 @@ struct ContentView: View {
     
     var publisher = PassthroughSubject<CellTapEvent, Never>()
     
+    var themePicker: some View {
+        let picker = Picker(selection: $colors, label: Text("Theme:")) {
+            ForEach(0..<Colors.Themes.all.count, id: \.self) {
+                Text("Theme \($0)").tag(Colors.Themes.all[$0])
+            }
+        }
+        #if os(iOS)
+        return picker.pickerStyle(.wheel)
+        #else
+        return picker.pickerStyle(.segmented)
+        #endif
+    }
+    
     var body: some View {
         VStack {
-            Picker(selection: $colors, label: Text("Theme:")) {
-                ForEach(0..<Colors.Themes.all.count, id: \.self) {
-                    Text("Theme \($0)").tag(Colors.Themes.all[$0])
-                }
-            }
-            .pickerStyle(.wheel)
+            themePicker
             HexGridView(publisher: publisher)
                 .onReceive(publisher) { output in
                     switch mode {
